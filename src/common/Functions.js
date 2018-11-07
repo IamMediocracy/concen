@@ -1,8 +1,10 @@
 'use strict';
 
+const startCase = require('lodash.startcase');
+
 // Converts camel case string to a sentence case
 export const formatCamelCaseString = text => {
-  return text;
+    return startCase(text);
 };
 
 // Handles page navigation
