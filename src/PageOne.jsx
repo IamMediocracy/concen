@@ -8,7 +8,10 @@ import { Input, Table } from 'antd';
 
 // Gets an object which has the count of letters
 const getLetterCount = text => {
-  return text;
+    return text.replace(/\W/g, '').split('').reduce((acc, char) => {
+        acc[char] = (acc[char] || 0) + 1;
+        return acc;
+    }, {});
 };
 
 // Define columns
