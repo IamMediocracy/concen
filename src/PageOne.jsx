@@ -16,13 +16,23 @@ const getLetterCount = text => {
 
 // Define columns
 const getColumns = (text, increment) => {
-  return [
-    {
-      title: 'Letter',
-      dataIndex: 'name',
-      render: text => <b>{text}</b>
+    let count = getLetterCount(text);
+    let vals = [];
+    Object.keys(count).forEach(e => vals.push(count[e]));
+    var max = Math.max(...vals);
+    let cols = [];
+    cols.push({
+        title: 'Letter',
+        dataIndex: 'name'
+    });
+    for(let i = 0; i+increment<max;i+=increment){
+        cols.push({
+            title: `${[i]} - ${[i+increment]}`,
+            dataIndex: `${[i]} - ${[i+increment]}`
+        });
     }
-  ];
+    console.log(cols);
+  return cols;
 };
 
 // Build entry
