@@ -16,6 +16,7 @@ const getLetterCount = text => {
 
 // Define columns
 const getColumns = (text, increment) => {
+    getRowTemplate(text,increment);
     let count = getLetterCount(text);
     let vals = [];
     Object.keys(count).forEach(e => vals.push(count[e]));
@@ -42,7 +43,15 @@ const getLetterRow = (letter, count, template) => {
 
 // Get row template
 const getRowTemplate = (text, increment) => {
-  return {};
+    let row = {'name': void 0};
+    let count = getLetterCount(text);
+    let vals = [];
+    Object.keys(count).forEach(e => vals.push(count[e]));
+    var max = Math.max(...vals);
+    for(let i = 0; i+increment<max;i+=increment){
+        row[`'${[i]} - ${[i+increment]}'`] = '-';
+    }
+  return row;
 };
 
 // Define data source
