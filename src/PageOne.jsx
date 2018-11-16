@@ -17,11 +17,11 @@ const getLetterCount = text => {
 // Define columns
 const getColumns = (text, increment) => {
     getRowTemplate(text,increment);
-    let count = getLetterCount(text);
-    let vals = [];
+    const count = getLetterCount(text);
+    const vals = [];
     Object.keys(count).forEach(e => vals.push(count[e]));
-    var max = Math.max(...vals);
-    let cols = [];
+    const max = Math.max(...vals);
+    const cols = [];
     cols.push({
         title: 'Letter',
         dataIndex: 'name'
@@ -32,22 +32,29 @@ const getColumns = (text, increment) => {
             dataIndex: `${[i]} - ${[i+increment]}`
         });
     }
-    console.log(cols);
   return cols;
 };
 
 // Build entry
 const getLetterRow = (letter, count, template) => {
-  return {};
+    const row = Object.assign({}, template);
+    row['name'] = row['key'] = letter;
+    Object.keys(row).forEach(e => {
+        let values = e.split("-").map(item => parseInt(item.trim()));
+        if (values[0] <= count && values[1] > count){
+            row[e] = 'X';
+        }
+    });
+    return row;
 };
 
 // Get row template
 const getRowTemplate = (text, increment) => {
-    let row = {'name': void 0};
-    let count = getLetterCount(text);
-    let vals = [];
+    const row = {'name': void 0};
+    const count = getLetterCount(text);
+    const vals = [];
     Object.keys(count).forEach(e => vals.push(count[e]));
-    var max = Math.max(...vals);
+    const max = Math.max(...vals);
     for(let i = 0; i+increment<max;i+=increment){
         row[`'${[i]} - ${[i+increment]}'`] = '-';
     }
